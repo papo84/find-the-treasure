@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חידה 4 - חפש את המטמון</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    .riddle-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .riddle-number {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-sm);
+      max-width: 400px;
+      margin: var(--spacing-xl) auto;
+    }
+    
+    .puzzle-cell {
+      aspect-ratio: 1;
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .puzzle-cell input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: transparent;
+      border-radius: var(--border-radius);
+    }
+    
+    .puzzle-cell.answer {
+      background: #d1fae5;
+      border-color: var(--primary-color);
+    }
+    
+    .puzzle-cell.empty {
+      background: var(--bg-secondary);
+      border: none;
+    }
+    
+    .clues-list {
+      background: var(--bg-secondary);
+      padding: var(--spacing-lg);
+      border-radius: var(--border-radius);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .clue-item {
+      padding: var(--spacing-sm);
+      margin-bottom: var(--spacing-xs);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      direction: rtl;
+      gap: var(--spacing-sm);
+    }
+    
+    .clue-item .clue-number {
+      font-weight: 600;
+    }
+    
+    .clue-item .clue-text {
+      text-align: right;
+    }
+    
+    .clue-item:last-child {
+      border-bottom: none;
+    }
+    
+    .answer-row {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin: var(--spacing-xl) 0;
+      justify-content: center;
+    }
+    
+    .answer-cell {
+      width: 60px;
+      height: 60px;
+      border: 3px solid var(--primary-color);
+      border-radius: var(--border-radius);
+      background: #d1fae5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .answer-cell input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="riddle-header">
+        <div class="riddle-number">4</div>
+        <h2>חידה רביעית</h2>
+        <p>פתרי את החידה לפי הרמזים</p>
+      </div>
+      
+      <div class="puzzle-grid">
+        <!-- Row 1: Top-right to bottom-left diagonal (RTL: leftmost to rightmost) -->
+        <div class="puzzle-cell answer"><input type="text" maxlength="1" id="r1c0"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r1c1"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r1c2"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r1c3"></div>
+        <!-- Row 2 -->
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r2c0"></div>
+        <div class="puzzle-cell answer"><input type="text" maxlength="1" id="r2c1"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r2c2"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r2c3"></div>
+        <!-- Row 3 -->
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r3c0"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r3c1"></div>
+        <div class="puzzle-cell answer"><input type="text" maxlength="1" id="r3c2"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r3c3"></div>
+        <!-- Row 4 -->
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r4c0"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r4c1"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r4c2"></div>
+        <div class="puzzle-cell answer"><input type="text" maxlength="1" id="r4c3"></div>
+      </div>
+      
+      <div class="clues-list">
+        <h3>רמזים:</h3>
+        <div class="clue-item">
+          <span class="clue-number">1.</span>
+          <span class="clue-text">אסקופה</span>
+        </div>
+        <div class="clue-item">
+          <span class="clue-number">2.</span>
+          <span class="clue-text">לבלר</span>
+        </div>
+        <div class="clue-item">
+          <span class="clue-number">3.</span>
+          <span class="clue-text">תפעילי את הרובה</span>
+        </div>
+        <div class="clue-item">
+          <span class="clue-number">4.</span>
+          <span class="clue-text">קורה לעתים רחוקות</span>
+        </div>
+      </div>
+      
+      <div class="answer-row">
+        <div class="answer-cell">
+          <input type="text" maxlength="1" id="final-answer1">
+        </div>
+        <div class="answer-cell">
+          <input type="text" maxlength="1" id="final-answer2">
+        </div>
+        <div class="answer-cell">
+          <input type="text" maxlength="1" id="final-answer3">
+        </div>
+        <div class="answer-cell">
+          <input type="text" maxlength="1" id="final-answer4">
+        </div>
+      </div>
+      
+      <div id="alert-container"></div>
+      
+      <div class="text-center mt-4">
+        <button onclick="checkAnswer()" class="btn btn-primary btn-large">
+          בדוק תשובה ✅
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module">
+    import { validateRiddle4 } from './src/js/riddles.js';
+    
+    // Get diagonal inputs (top-right to bottom-left in RTL)
+    const diagonalInputs = [
+      document.getElementById('r1c0'), // Row 1, Col 0 (diagonal)
+      document.getElementById('r2c1'), // Row 2, Col 1 (diagonal)
+      document.getElementById('r3c2'), // Row 3, Col 2 (diagonal)
+      document.getElementById('r4c3'), // Row 4, Col 3 (diagonal)
+    ];
+    
+    // Get answer row inputs
+    const answerInputs = [
+      document.getElementById('final-answer1'),
+      document.getElementById('final-answer2'),
+      document.getElementById('final-answer3'),
+      document.getElementById('final-answer4'),
+    ];
+    
+    // Collect all inputs in reading order (RTL: right to left, top to bottom)
+    // Row 1: r1c0, r1c1, r1c2, r1c3
+    // Row 2: r2c0, r2c1, r2c2, r2c3
+    // Row 3: r3c0, r3c1, r3c2, r3c3
+    // Row 4: r4c0, r4c1, r4c2, r4c3
+    const allInputsInOrder = [
+      // Row 1 (right to left)
+      document.getElementById('r1c0'),
+      document.getElementById('r1c1'),
+      document.getElementById('r1c2'),
+      document.getElementById('r1c3'),
+      // Row 2
+      document.getElementById('r2c0'),
+      document.getElementById('r2c1'),
+      document.getElementById('r2c2'),
+      document.getElementById('r2c3'),
+      // Row 3
+      document.getElementById('r3c0'),
+      document.getElementById('r3c1'),
+      document.getElementById('r3c2'),
+      document.getElementById('r3c3'),
+      // Row 4
+      document.getElementById('r4c0'),
+      document.getElementById('r4c1'),
+      document.getElementById('r4c2'),
+      document.getElementById('r4c3'),
+    ];
+    
+    // Set tab indexes in reading order (RTL: rightmost = 1, leftmost = highest)
+    allInputsInOrder.forEach((input, index) => {
+      if (input) {
+        input.tabIndex = index + 1;
+      }
+    });
+    
+    // Sync diagonal with answer row (bidirectional)
+    function syncDiagonal() {
+      // Diagonal to Answer: when diagonal changes, update answer row
+      diagonalInputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          answerInputs[index].value = e.target.value;
+        });
+        
+        // Also sync on paste
+        input.addEventListener('paste', () => {
+          setTimeout(() => {
+            answerInputs[index].value = input.value;
+          }, 0);
+        });
+      });
+      
+      // Answer to Diagonal: when answer row changes, update diagonal
+      answerInputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          diagonalInputs[index].value = e.target.value;
+        });
+        
+        // Also sync on paste
+        input.addEventListener('paste', () => {
+          setTimeout(() => {
+            diagonalInputs[index].value = input.value;
+          }, 0);
+        });
+      });
+    }
+    
+    // Auto-advance function for any input list
+    function setupAutoAdvance(inputs) {
+      inputs.forEach((input, index) => {
+        if (!input) return;
+        
+        input.addEventListener('input', (e) => {
+          if (e.target.value && index < inputs.length - 1) {
+            // Move to next input in the list
+            inputs[index + 1].focus();
+          }
+        });
+        
+        // Handle backspace to go to previous input
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && index > 0) {
+            e.preventDefault();
+            inputs[index - 1].focus();
+          }
+        });
+      });
+    }
+    
+    // Setup auto-advance for each row
+    setupAutoAdvance([
+      document.getElementById('r1c0'),
+      document.getElementById('r1c1'),
+      document.getElementById('r1c2'),
+      document.getElementById('r1c3'),
+    ]);
+    setupAutoAdvance([
+      document.getElementById('r2c0'),
+      document.getElementById('r2c1'),
+      document.getElementById('r2c2'),
+      document.getElementById('r2c3'),
+    ]);
+    setupAutoAdvance([
+      document.getElementById('r3c0'),
+      document.getElementById('r3c1'),
+      document.getElementById('r3c2'),
+      document.getElementById('r3c3'),
+    ]);
+    setupAutoAdvance([
+      document.getElementById('r4c0'),
+      document.getElementById('r4c1'),
+      document.getElementById('r4c2'),
+      document.getElementById('r4c3'),
+    ]);
+    setupAutoAdvance(answerInputs);
+    
+    window.checkAnswer = function() {
+      const answers = answerInputs.map(input => input.value);
+      
+      const alertContainer = document.getElementById('alert-container');
+      
+      if (validateRiddle4(answers)) {
+        alertContainer.innerHTML = '<div class="alert alert-success">✅ נכון! מעבר לחידה הבאה...</div>';
+        setTimeout(() => {
+          window.location.href = 'riddle5.html';
+        }, 1500);
+      } else {
+        alertContainer.innerHTML = '<div class="alert alert-error">❌ תשובה שגויה. נסי שוב!</div>';
+        // Clear all inputs
+        answerInputs.forEach(input => input.value = '');
+        diagonalInputs.forEach(input => input.value = '');
+      }
+    };
+    
+    // Initialize sync
+    syncDiagonal();
+    
+    // Auto-focus first input (top-right)
+    document.getElementById('r1c0').focus();
+  </script>
+</body>
+</html>
+

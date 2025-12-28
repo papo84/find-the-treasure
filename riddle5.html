@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חידה 5 - חפש את המטמון</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    .riddle-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .riddle-number {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .question-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      padding: var(--spacing-xl);
+      border-radius: var(--border-radius-lg);
+      margin: var(--spacing-xl) 0;
+      border: 3px solid #fbbf24;
+      text-align: center;
+    }
+    
+    .question-box h3 {
+      font-size: 1.5rem;
+      color: #92400e;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .answer-input-wrapper {
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .answer-input-wrapper input {
+      font-size: 1.25rem;
+      padding: var(--spacing-lg);
+      text-align: center;
+    }
+    
+    .hint-section {
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-md);
+      background: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      border-right: 4px solid var(--warning-color);
+    }
+    
+    .hint-button {
+      margin-left: var(--spacing-md);
+    }
+    
+    .hint-text {
+      margin-top: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: #fef3c7;
+      border-radius: var(--border-radius);
+      color: #92400e;
+      display: none;
+    }
+    
+    .hint-text.show {
+      display: block;
+      animation: fadeIn 0.3s ease-in;
+    }
+    
+    .final-riddle {
+      text-align: center;
+      padding: var(--spacing-lg);
+      background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+      border-radius: var(--border-radius-lg);
+      margin: var(--spacing-xl) 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="riddle-header">
+        <div class="riddle-number">5</div>
+        <h2>חידה אחרונה! 🎯</h2>
+        <p>החידה האחרונה - את כמעט שם!</p>
+      </div>
+      
+      <div class="question-box">
+        <h3>❓ מה זה "הבו לי אות שאוכל לאפות"?</h3>
+      </div>
+      
+      <div class="answer-input-wrapper">
+        <label for="answer">התשובה:</label>
+        <input 
+          type="text" 
+          id="answer" 
+          placeholder="הקלדי את התשובה כאן..."
+          autofocus
+        >
+      </div>
+      
+      <div class="hint-section">
+        <button onclick="toggleHint()" class="btn btn-secondary hint-button">
+          💡 הצג רמז
+        </button>
+        <div id="hint-text" class="hint-text">
+          חידת הגיון. התשובה בעלת 4 אותיות למכשיר חשמל
+        </div>
+      </div>
+      
+      <div id="alert-container"></div>
+      
+      <div class="text-center mt-4">
+        <button onclick="checkAnswer()" class="btn btn-primary btn-large">
+          בדוק תשובה ✅
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module">
+    import { validateRiddle5 } from './src/js/riddles.js';
+    
+    window.checkAnswer = function() {
+      const answer = document.getElementById('answer').value.trim();
+      const alertContainer = document.getElementById('alert-container');
+      
+      if (validateRiddle5(answer)) {
+        alertContainer.innerHTML = '<div class="alert alert-success">🎉🎉🎉 כל הכבוד! פתרת את כל החידות! מעבר למסך החגיגה...</div>';
+        setTimeout(() => {
+          window.location.href = 'celebration.html';
+        }, 2000);
+      } else {
+        alertContainer.innerHTML = '<div class="alert alert-error">❌ תשובה שגויה. נסי שוב!</div>';
+        document.getElementById('answer').value = '';
+      }
+    };
+    
+    window.toggleHint = function() {
+      const hintText = document.getElementById('hint-text');
+      hintText.classList.toggle('show');
+    };
+    
+    document.getElementById('answer').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        checkAnswer();
+      }
+    });
+  </script>
+</body>
+</html>
+

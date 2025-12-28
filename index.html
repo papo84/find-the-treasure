@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="משחק חפש את המטמון ליום הולדת">
+  <title>חפש את המטמון - יום הולדת</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    .welcome-screen {
+      text-align: center;
+      padding: var(--spacing-2xl);
+    }
+    
+    .welcome-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: var(--spacing-xl);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .welcome-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-2xl);
+    }
+    
+    .treasure-icon {
+      font-size: 5rem;
+      margin: var(--spacing-xl) 0;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .welcome-message {
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      margin: var(--spacing-xl) 0;
+      line-height: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card welcome-screen">
+      <div class="treasure-icon">🎂🎉</div>
+      <h1 class="welcome-title">ברוכים הבאים!</h1>
+      <h2 class="welcome-subtitle">חפש את המטמון</h2>
+      <p class="welcome-message">
+        משחק חידות מרגש מחכה לך!<br>
+        פתרי את כל החידות כדי למצוא את המטמון 🎁
+      </p>
+      <a href="instructions.html" class="btn btn-primary btn-large">
+        בואו נתחיל! 🚀
+      </a>
+    </div>
+  </div>
+</body>
+</html>
+

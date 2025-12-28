@@ -1,0 +1,291 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head> 
+	<meta charset="utf-8" /> 
+	<title>2</title> 
+    <script src="TreasureHunt.js" type="text/javascript"></script>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+	<style type="text/css" media="screen">
+   
+	    p
+	    {
+	        margin-top: 1em;
+	    }
+	    body
+	    {
+	        background: #e5e5e5;
+	        padding: 1em;
+	        margin: 0;
+	        font-size: 16px;
+	    }
+	    body *
+	    {
+	        margin: 0;
+	        padding: 0;
+	        font-family: "Lucida Grande" , helvetica, sans-serif;
+	    }
+	    
+	    p
+	    {
+	        margin: 0 0 1em;
+	        font-size: 14px;
+	    }
+	    
+	    #Apply, #Title
+	    {
+	        border: 1px solid #555;
+	        padding: 0.5em;
+	        font-size: 15px;
+	        line-height: 1.2em;
+	        background: #fff;
+	        background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+	        -webkit-appearance: none;
+	        -webkit-box-shadow: 1px 1px 1px #fff;
+	        -webkit-border-radius: 0.5em;
+	    }
+	    
+	    #Apply
+	    {
+			padding: 0.35em 1em;
+	        width: auto;
+	        line-height: 1.5em;
+	        text-shadow: 0 0 2px #300;
+	        font-weight: bold;
+	        -webkit-border-radius: 1.0em;
+			text-decoration:none;
+	    }
+	    #Title
+	    {
+	        border: 1px solid #555;
+	        padding: auto;
+	        font-weight: 900;
+	        line-height: 1.2em;
+	        width: 50%;
+	        text-align: center;
+	        font-family:"Times New Roman",Georgia,Serif;
+	        font-size: x-large;
+	        font-style: normal;
+	        background: #fff;
+	        background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+	        -webkit-appearance: none;
+	        -webkit-box-shadow: 1px 1px 1px #fff;
+	        -webkit-border-radius: 0.5em;
+	    }
+	    
+		a:link { color: black; }
+		a:visited { color: black; }
+		a:hover { color: blue; }
+		a:active { color: black;}
+
+	    .Row
+	    {
+	    	border: 1px solid #555;
+	        width: 100%;
+	        height:20px;	
+	    }
+	    .cell, .AnswerCell
+	    {
+	    	border: 1px solid #555;	
+	        height:30px;
+	    }
+		.cell { width: 12.5%;}
+		.AnswerCell { width: 7%; }
+		.TextCell, .SpaceCell, .DefinitionCell
+		{
+			width:100%; height:100%;vertical-align:baseline; background:inherit; border-color:transparent; text-align:center; max-height:100%; text-transform:uppercase;
+		}
+		.TextCell, .SpaceCell
+		{
+			font-size:larger;
+			font-weight:900;			 
+		}
+		.SpaceCell
+		{
+			border-color:#e5e5e5;
+		}
+		.DefinitionCell
+		{
+			font-weight:300;
+			font-size:small;
+			text-align:right;
+			readonly:readonly;
+			height:20px;
+		}
+		
+	</style> 
+</head> 
+ 
+<body style="height: 100%;"> 
+    <table id='table' width='100%'>
+        <tbody>
+            <tr>
+                <td align='center'>
+                    <p id='Title'>II</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table id="crossword" cellpadding="0" cellspacing="0" style="border-collapse: collapse; display: block; width: 100%;">
+        <tbody width='100%'>
+            <!--Row1-->
+            <tr class='Row'>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/6.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/5.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/4.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/3.png');"></textarea></td>
+                <td class='Cell' style="background-color:black;";></td> 
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/2.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/1.png');"></textarea></td>               
+            </tr>
+            <tr class='Row'>
+                <td class='Cell' style="background-color:black;";></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell" style="background-color:cyan;";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/8.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/7.png');"></textarea></td>               
+            </tr>
+            <tr class='Row'>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/10.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/9.png');"></textarea></td>
+                <td class='Cell' style="background-color:black;";></td>
+				<td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell' style="background-color:black;";></td>             
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+            </tr>
+			<tr class='Row'>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/14.png');"></textarea></td>
+                <td class='Cell' style="background-color:black;";></td>
+                <td class='Cell' style="background-color:black;";></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/13.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/12.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/11.png');"></textarea></td>             
+            </tr>
+			<tr class='Row'>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell' style="background-color:black;";></td> 
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/17.png');"></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/16.png');"></textarea></td>
+                <td class='Cell' style="background-color:black;";></td> 
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/15.png');"></textarea></td>             
+            </tr>
+			<tr class='Row'>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/19.png');"></textarea></td>
+                <td class='Cell' style="background-color:black;";></td> 
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell";></textarea></td>
+                <td class='Cell'><textarea maxlength='1';  class="TextCell"; style="background-image:url('./Numbers/18.png');"></textarea></td>             
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <table id="crossword" cellpadding="0" cellspacing="0" style="border-color:transparent; border-collapse: collapse; display: block; width: 100%;">
+        <tbody width='100%' style="text-align:right;">		
+			<tr style="border-color:#e5e5e5;"><td height="10px";></td></tr>
+            <tr>
+                <td width="50%"><span class="DefinitionCell";><b><u>מאונך</u></b></span></td>
+                <td width="50%"><span class="DefinitionCell";><b><u>מאוזן</u></b></span></td>           
+            </tr> 
+        </tbody>
+    </table>
+	
+    <table id="crossword" cellpadding="0" cellspacing="0" style="border-color:transparent; border-collapse: collapse; display: block; width: 100%;">
+        <tbody width='100%' style="text-align:right;">		
+			<tr><td height="10px";></td></tr>
+            <tr>
+                <td style="with:45%;"><textarea class="DefinitionCell";>מטבע יפני</textarea></td><td style="width:5%;"><textarea class="DefinitionCell";>.1</textarea></td>
+                <td style="with:45%;"><textarea class="DefinitionCell";>מדבר, שממה</textarea></td><td style="width:5%;"><textarea class="DefinitionCell";>.1</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:45%;"><textarea class="DefinitionCell";>מש, זז</textarea></td><td style="width:5%;"><textarea class="DefinitionCell";>.2</textarea></td>
+                <td style="with:45%;"><textarea class="DefinitionCell";>תהפוך לנסיך</textarea></td><td style="width:5%;"><textarea class="DefinitionCell";>.3</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:45%;"><textarea class="DefinitionCell";>פקודה, הוראה</textarea></td><td style="width:5%;"><textarea class="DefinitionCell";>.3</textarea></td>
+                <td style="with:45%;"><textarea class="DefinitionCell";>סקנדל, מחדל</textarea></td><td style="width:5%;"><textarea class="DefinitionCell";>.7</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:45%;"><textarea class="DefinitionCell";>אי זוגי</textarea></td><td style="width:5%;"><textarea class="DefinitionCell";>.4</textarea></td>
+                <td style="with:45%;"><textarea class="DefinitionCell";>מוקדם, שלב מכין</textarea></td><td style="width:5%;"><textarea class="DefinitionCell";>.9</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:40%;"><textarea class="DefinitionCell";>רוק, נוזל פה</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.5</textarea></td>
+                <td style="with:40%;"><textarea class="DefinitionCell";>שי, דורון</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.11</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:40%;"><textarea class="DefinitionCell";>שצבעו נחלש</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.6</textarea></td>
+                <td style="with:40%;"><textarea class="DefinitionCell";>מקור מים גדול</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.14</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:40%;"><textarea class="DefinitionCell";>שירה, זמר</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.8</textarea></td>
+                <td style="with:40%;"><textarea class="DefinitionCell";>קרס, אונקל</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.15</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:40%;"><textarea class="DefinitionCell";>מחלקת מחשוב בצה"ל</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.10</textarea></td>
+                <td style="with:40%;"><textarea class="DefinitionCell";>סוג של אגוז</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.16</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:40%;"><textarea class="DefinitionCell";>סוג של מבנה נתונים</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.12</textarea></td>
+                <td style="with:40%;"><textarea class="DefinitionCell";>עבר מעירנות לשינה</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.18</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:40%;"><textarea class="DefinitionCell";>שוק, תדהמה</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.13</textarea></td>
+                <td style="with:40%;"><textarea class="DefinitionCell";>משקה אלכוהולי</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.19</textarea></td>                    
+            </tr>
+			<tr>
+                <td style="with:40%;"><textarea class="DefinitionCell";>אוסף פרחים</textarea></td><td style="width:10%;"><textarea class="DefinitionCell";>.17</textarea></td>
+                <td style="with:40%;"><textarea class="DefinitionCell";></textarea></td><td style="width:10%;"><textarea class="DefinitionCell";></textarea></td>                    
+            </tr>			
+			
+        </tbody>
+    </table>
+
+    <table id="crossword" cellpadding="0" cellspacing="0" style="border-collapse: collapse; display: block; width: 100%; margin-right:1;">
+        <tbody width='100%' style="border-color:#e5e5e5;">
+		<tr style="border-color:#e5e5e5;"><td height="10px";></td></tr>
+            <!--Row1-->
+            <tr class='Row' style="border-color:#e5e5e5;">
+			 <td><a id="Apply"; href="javascript:Riddle2('Riddle2','Answer1','Answer2','Answer3','Answer4','Answer5','Answer6','Answer7');";>אישור</a></td>
+			<td width="0%"><span maxlength='1';  class="SpaceCell";></span></td>
+				<td class='AnswerCell';><textarea maxlength='1';  class="TextCell"; id="Answer7"></textarea></td>
+				<td class='AnswerCell';><textarea maxlength='1';  class="TextCell"; id="Answer6"></textarea></td>
+				<td class='AnswerCell';><textarea maxlength='1';  class="TextCell"; id="Answer5"></textarea></td>
+				<td class='AnswerCell';><textarea maxlength='1';  class="TextCell"; id="Answer4"></textarea></td>
+				<td class='AnswerCell';><textarea maxlength='1';  class="TextCell"; id="Answer3"></textarea></td>
+				<td class='AnswerCell';><textarea maxlength='1';  class="TextCell"; id="Answer2"></textarea></td>
+				<td class='AnswerCell';><textarea maxlength='1';  class="TextCell"; id="Answer1"></textarea></td>
+            <tr>
+			<td width="50%"><span maxlength='1';  class="SpaceCell";></span></td>
+			<td></td>
+				<td style="vertical-align:top; text-align:center; font-size:small;"> </td>
+				<td style="vertical-align:top; text-align:center; font-size:small;">1</td>
+				<td style="vertical-align:top; text-align:center; font-size:small;">17</td>
+				<td style="vertical-align:top; text-align:center; font-size:small;">14</td>
+				<td style="vertical-align:top; text-align:center; font-size:small;">15</td>
+				<td style="vertical-align:top; text-align:center; font-size:small;">16</td>
+				<td style="vertical-align:top; text-align:center; font-size:small;">9</td>
+			</tr>
+
+        </tbody>
+    </table>
+     
+</body> 
+</html>

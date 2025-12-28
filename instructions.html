@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="הוראות למשחק חפש את המטמון">
+  <title>הוראות - חפש את המטמון</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    .instructions-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .instruction-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-lg);
+      padding: var(--spacing-md);
+      background: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      border-right: 4px solid var(--primary-color);
+    }
+    
+    .instruction-icon {
+      font-size: 2rem;
+      margin-left: var(--spacing-md);
+      flex-shrink: 0;
+    }
+    
+    .instruction-text {
+      flex: 1;
+      color: var(--text-primary);
+      line-height: 1.8;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      padding: var(--spacing-lg);
+      border-radius: var(--border-radius);
+      margin: var(--spacing-xl) 0;
+      border: 2px solid #fbbf24;
+    }
+    
+    .highlight-box strong {
+      color: #92400e;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1 class="text-center">📋 הוראות המשחק</h1>
+      
+      <div class="instructions-content">
+        <div class="instruction-item">
+          <div class="instruction-icon">🎯</div>
+          <div class="instruction-text">
+            <strong>מטרת המשחק:</strong> פתרי את כל החידות כדי למצוא את המטמון!
+          </div>
+        </div>
+        
+        <div class="instruction-item">
+          <div class="instruction-icon">🧩</div>
+          <div class="instruction-text">
+            <strong>סוגי חידות:</strong> בכל חידה תמצאי סוג שונה של אתגר - תשבצים, שאלות פתוחות ועוד.
+          </div>
+        </div>
+        
+        <div class="instruction-item">
+          <div class="instruction-icon">📍</div>
+          <div class="instruction-text">
+            <strong>מיקומים:</strong> כל חידה מובילה למקום מסוים בבית או למכשיר כלשהו. שם תמצאי את הפתעה הבאה!
+          </div>
+        </div>
+        
+        <div class="instruction-item">
+          <div class="instruction-icon">✅</div>
+          <div class="instruction-text">
+            <strong>התקדמות:</strong> עלייך לפתור את החידה הנוכחית כדי לעבור לחידה הבאה.
+          </div>
+        </div>
+        
+        <div class="instruction-item">
+          <div class="instruction-icon">📊</div>
+          <div class="instruction-text">
+            <strong>רמת קושי:</strong> החידות מסודרות מהקל לקשה, כך שתוכלי להתחמם בהדרגה.
+          </div>
+        </div>
+        
+        <div class="instruction-item">
+          <div class="instruction-icon">💡</div>
+          <div class="instruction-text">
+            <strong>רמזים:</strong> בחלק מהחידות יש כפתור רמז שיעזור לך אם תתקעי.
+          </div>
+        </div>
+        
+        <div class="highlight-box">
+          <strong>💎 קוד סיום:</strong><br>
+          בסיום כל החידות תקבלי קוד מיוחד. שלחי את הקוד כדי לאשר שסיימת את המשחק!
+        </div>
+        
+        <div class="instruction-item">
+          <div class="instruction-icon">🎉</div>
+          <div class="instruction-text">
+            <strong>הכי חשוב:</strong> תהני! זה משחק לכיף, אז אל תלחצי על עצמך. אם צריך עזרה, אפשר תמיד לשאול.
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="riddle1.html" class="btn btn-primary btn-large">
+          מוכנים? בואו נתחיל! 🚀
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

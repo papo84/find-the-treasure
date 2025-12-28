@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>סיום - חפש את המטמון</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    .end-container {
+      text-align: center;
+      padding: var(--spacing-2xl);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .end-title {
+      font-size: 5rem;
+      font-weight: 800;
+      margin-bottom: var(--spacing-xl);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    .end-emoji {
+      font-size: 6rem;
+      margin: var(--spacing-xl) 0;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+    
+    .end-message {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin: var(--spacing-xl) 0;
+      line-height: 2;
+      max-width: 600px;
+    }
+    
+    .code-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      padding: var(--spacing-xl);
+      border-radius: var(--border-radius-lg);
+      margin: var(--spacing-xl) 0;
+      border: 3px solid #fbbf24;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .code-box h3 {
+      color: #92400e;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .code-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #92400e;
+      letter-spacing: 0.3em;
+      font-family: monospace;
+      padding: var(--spacing-md);
+      background: white;
+      border-radius: var(--border-radius);
+      margin: var(--spacing-md) 0;
+    }
+    
+    .copy-button {
+      margin-top: var(--spacing-md);
+    }
+    
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: var(--spacing-lg);
+      animation: rotate 3s linear infinite;
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="end-container">
+    <div class="card">
+      <div class="success-icon">✅</div>
+      <h1 class="end-title">הסוף!</h1>
+      <div class="end-emoji">🎉🎂🎁</div>
+      
+      <div class="end-message">
+        <p><strong>כל הכבוד! סיימת את המשחק בהצלחה! 🎊</strong></p>
+        <p>שלחי את הקוד למטה כדי לאשר שסיימת את כל החידות.</p>
+      </div>
+      
+      <div class="code-box">
+        <h3>קוד סיום:</h3>
+        <div class="code-value" id="completion-code"></div>
+        <button onclick="copyCode()" class="btn btn-secondary copy-button">
+          📋 העתק קוד
+        </button>
+        <div id="copy-message" style="margin-top: var(--spacing-sm); color: var(--success-color); display: none;">
+          ✅ הועתק!
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="index.html" class="btn btn-primary btn-large">
+          חזרה להתחלה 🏠
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module">
+    import { getCompletionCode } from './src/js/riddles.js';
+    
+    // Display completion code
+    const code = getCompletionCode();
+    document.getElementById('completion-code').textContent = code;
+    
+    window.copyCode = function() {
+      navigator.clipboard.writeText(code).then(() => {
+        const message = document.getElementById('copy-message');
+        message.style.display = 'block';
+        setTimeout(() => {
+          message.style.display = 'none';
+        }, 2000);
+      }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        const message = document.getElementById('copy-message');
+        message.style.display = 'block';
+        setTimeout(() => {
+          message.style.display = 'none';
+        }, 2000);
+      });
+    };
+  </script>
+</body>
+</html>
+

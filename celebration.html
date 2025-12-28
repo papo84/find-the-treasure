@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מזל טוב! - חפש את המטמון</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='50%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23f093fb;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='48' fill='url(%23grad)'/%3E%3Cpath d='M30 60 L30 75 L70 75 L70 60 Z' fill='%23fff'/%3E%3Cpath d='M35 55 L35 60 L65 60 L65 55 Z' fill='%23fff'/%3E%3Cpath d='M40 50 L40 55 L60 55 L60 50 Z' fill='%23fff'/%3E%3Ccircle cx='45' cy='52' r='2' fill='%23fbbf24'/%3E%3Ccircle cx='55' cy='52' r='2' fill='%23fbbf24'/%3E%3Cpath d='M50 45 L48 50 L52 50 Z' fill='%23ef4444'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    .celebration-container {
+      text-align: center;
+      padding: var(--spacing-2xl);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--primary-color);
+      position: absolute;
+      animation: confetti-fall 3s linear infinite;
+      z-index: 1000;
+    }
+    
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    
+    .celebration-title {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: var(--spacing-xl);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: bounce 1s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.1); }
+    }
+    
+    .celebration-emoji {
+      font-size: 8rem;
+      margin: var(--spacing-xl) 0;
+      animation: rotate 2s ease-in-out infinite;
+    }
+    
+    @keyframes rotate {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-10deg) scale(1.1); }
+      75% { transform: rotate(10deg) scale(1.1); }
+    }
+    
+    .celebration-message {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin: var(--spacing-xl) 0;
+      line-height: 2;
+      max-width: 600px;
+    }
+    
+    .celebration-message p {
+      margin-bottom: var(--spacing-md);
+      font-size: 1.25rem;
+    }
+    
+    .gif-container {
+      margin: var(--spacing-xl) 0;
+      max-width: 600px;
+      width: 100%;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      background: var(--bg-secondary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .gif-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .code-display {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      padding: var(--spacing-xl);
+      border-radius: var(--border-radius-lg);
+      margin: var(--spacing-xl) 0;
+      border: 3px solid #fbbf24;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #92400e;
+      letter-spacing: 0.2em;
+    }
+    
+    .fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+  </style>
+</head>
+<body>
+  <div class="celebration-container">
+    <!-- Confetti -->
+    <div id="confetti-container"></div>
+    
+    <div class="card fade-in">
+      <div class="celebration-emoji delay-1">🎉🎂🎁</div>
+      <h1 class="celebration-title delay-2">מזל טוב!</h1>
+      
+      <div class="celebration-message delay-3">
+        <p>🎊 כל הכבוד! פתרת את כל החידות! 🎊</p>
+        <p>מקווים שנהנית מהמשחק ושזה היה כיף!</p>
+        <p>שיהיה לך המון מזל טוב!</p>
+        <p>שלא תפסיקי להנות, לשמוח ולחייך!</p>
+        <p>שתהיה לך השנה הכי מדהימה שאפשר!</p>
+      </div>
+      
+      <div class="gif-container delay-4">
+        <img 
+          src="./src/minion-birthday.gif" 
+          alt="Birthday celebration"
+          loading="lazy">
+      </div>
+      
+      <div class="code-display delay-4 fade-in">
+        <div style="font-size: 1rem; margin-bottom: var(--spacing-sm);">קוד סיום:</div>
+        <div id="completion-code"></div>
+      </div>
+      
+      <div class="text-center mt-4 delay-4">
+        <a href="end.html" class="btn btn-primary btn-large">
+          המשך לסיום 🏁
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module">
+    import { getCompletionCode } from './src/js/riddles.js';
+    
+    // Display completion code
+    document.getElementById('completion-code').textContent = getCompletionCode();
+    
+    
+    // Create confetti
+    function createConfetti() {
+      const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b', '#fa709a'];
+      const container = document.getElementById('confetti-container');
+      
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 3 + 's';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        container.appendChild(confetti);
+      }
+    }
+    
+    createConfetti();
+    
+    // Add more confetti periodically
+    setInterval(() => {
+      const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe'];
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDelay = '0s';
+      confetti.style.animationDuration = '3s';
+      document.getElementById('confetti-container').appendChild(confetti);
+      
+      setTimeout(() => confetti.remove(), 3000);
+    }, 500);
+  </script>
+</body>
+</html>
+
