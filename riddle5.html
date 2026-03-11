@@ -74,14 +74,6 @@
       display: block;
       animation: fadeIn 0.3s ease-in;
     }
-    
-    .final-riddle {
-      text-align: center;
-      padding: var(--spacing-lg);
-      background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
-      border-radius: var(--border-radius-lg);
-      margin: var(--spacing-xl) 0;
-    }
   </style>
 </head>
 <body>
@@ -89,12 +81,12 @@
     <div class="card">
       <div class="riddle-header">
         <div class="riddle-number">5</div>
-        <h2>חידה אחרונה! 🎯</h2>
-        <p>החידה האחרונה - את כמעט שם!</p>
+        <h2>חידה חמישית</h2>
+        <p>פתרי את החידה</p>
       </div>
       
       <div class="question-box">
-        <h3>❓ מה זה "הבו לי אות שאוכל לאפות"?</h3>
+        <h3>❓ מה זה "הפך מנותק"?</h3>
       </div>
       
       <div class="answer-input-wrapper">
@@ -112,7 +104,7 @@
           💡 הצג רמז
         </button>
         <div id="hint-text" class="hint-text">
-          חידת הגיון. התשובה בעלת 4 אותיות למכשיר חשמל
+          אנגרמה למכשיר חשמלי (3,5)
         </div>
       </div>
       
@@ -127,17 +119,17 @@
   </div>
   
   <script type="module">
-    import { validateRiddle5 } from './src/js/riddles.js';
+    import { validateRiddle3 } from './src/js/riddles.js';
     
     window.checkAnswer = function() {
       const answer = document.getElementById('answer').value.trim();
       const alertContainer = document.getElementById('alert-container');
       
-      if (validateRiddle5(answer)) {
-        alertContainer.innerHTML = '<div class="alert alert-success">🎉🎉🎉 כל הכבוד! פתרת את כל החידות! מעבר למסך החגיגה...</div>';
+      if (validateRiddle3(answer)) {
+        alertContainer.innerHTML = '<div class="alert alert-success">✅ נכון! מעבר לחידה הבאה...</div>';
         setTimeout(() => {
-          window.location.href = 'celebration.html';
-        }, 2000);
+          window.location.href = 'riddle6.html';
+        }, 1500);
       } else {
         alertContainer.innerHTML = '<div class="alert alert-error">❌ תשובה שגויה. נסי שוב!</div>';
         document.getElementById('answer').value = '';
@@ -149,6 +141,7 @@
       hintText.classList.toggle('show');
     };
     
+    // Allow Enter key to submit
     document.getElementById('answer').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         checkAnswer();
@@ -157,4 +150,3 @@
   </script>
 </body>
 </html>
-

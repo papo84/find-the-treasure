@@ -100,18 +100,6 @@
       display: block;
     }
     
-    .code-display {
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-      padding: var(--spacing-xl);
-      border-radius: var(--border-radius-lg);
-      margin: var(--spacing-xl) 0;
-      border: 3px solid #fbbf24;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #92400e;
-      letter-spacing: 0.2em;
-    }
-    
     .fade-in {
       animation: fadeIn 1s ease-in;
     }
@@ -151,11 +139,6 @@
           loading="lazy">
       </div>
       
-      <div class="code-display delay-4 fade-in">
-        <div style="font-size: 1rem; margin-bottom: var(--spacing-sm);">קוד סיום:</div>
-        <div id="completion-code"></div>
-      </div>
-      
       <div class="text-center mt-4 delay-4">
         <a href="end.html" class="btn btn-primary btn-large">
           המשך לסיום 🏁
@@ -165,12 +148,6 @@
   </div>
   
   <script type="module">
-    import { getCompletionCode } from './src/js/riddles.js';
-    
-    // Display completion code
-    document.getElementById('completion-code').textContent = getCompletionCode();
-    
-    
     // Create confetti
     function createConfetti() {
       const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b', '#fa709a'];

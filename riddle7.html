@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חידה 7 - חפש את המטמון</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    .riddle-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .riddle-number {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .crossword-table {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
+    
+    .crossword-table td {
+      width: 12.5%;
+      aspect-ratio: 1;
+      border: 1px solid var(--border-color);
+      position: relative;
+      background: var(--bg-primary);
+    }
+    
+    .crossword-table td input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: transparent;
+    }
+    
+    .crossword-table td.black {
+      background: var(--text-primary);
+    }
+    
+    .crossword-table td.highlight {
+      background: #dbeafe;
+    }
+    
+    .number-label {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      z-index: 1;
+    }
+    
+    .clues-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .clue-column {
+      padding: var(--spacing-lg);
+      background: var(--bg-secondary);
+      border-radius: var(--border-radius);
+    }
+    
+    .clue-column h3 {
+      margin-bottom: var(--spacing-md);
+      color: var(--primary-color);
+    }
+    
+    .clue-item {
+      padding: var(--spacing-sm);
+      margin-bottom: var(--spacing-xs);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 0.9rem;
+      direction: rtl;
+      gap: var(--spacing-sm);
+    }
+    
+    .clue-item .clue-number {
+      font-weight: 600;
+    }
+    
+    .clue-item .clue-text {
+      text-align: right;
+    }
+    
+    .answer-row {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin: var(--spacing-xl) 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .answer-cell {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--primary-color);
+      border-radius: var(--border-radius);
+      background: #d1fae5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Color classes for answer boxes and crossword cells */
+    .color-pink { border-color: #ec4899 !important; }
+    .color-red { border-color: #ef4444 !important; }
+    .color-orange { border-color: #f97316 !important; }
+    .color-yellow { border-color: #eab308 !important; }
+    .color-green { border-color: #22c55e !important; }
+    .color-indigo { border-color: #6366f1 !important; }
+    .color-violet { border-color: #a855f7 !important; }
+    
+    /* Make crossword cells with colors have thicker borders */
+    .crossword-table td.color-pink,
+    .crossword-table td.color-red,
+    .crossword-table td.color-orange,
+    .crossword-table td.color-yellow,
+    .crossword-table td.color-green,
+    .crossword-table td.color-indigo,
+    .crossword-table td.color-violet {
+      border-width: 3px !important;
+    }
+    
+    .answer-cell input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: transparent;
+    }
+    
+    @media (max-width: 768px) {
+      .clues-section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="riddle-header">
+        <div class="riddle-number">7</div>
+        <h2>חידה שביעית ואחרונה</h2>
+        <p>פתרי את התשבץ וזהה את המילה</p>
+      </div>
+      
+      <div class="crossword-wrapper">
+        <table class="crossword-table">
+          <!-- Transposed for RTL: each row reversed -->
+          <tr>
+            <td class="highlight color-yellow"><span class="number-label">1</span><input type="text" maxlength="1" id="cell1"></td>
+            <td class="highlight"><span class="number-label">2</span><input type="text" maxlength="1"></td>
+            <td class="black"></td>
+            <td class="highlight"><span class="number-label">3</span><input type="text" maxlength="1"></td>
+            <td class="highlight"><span class="number-label">4</span><input type="text" maxlength="1"></td>
+            <td class="highlight"><span class="number-label">5</span><input type="text" maxlength="1"></td>
+            <td class="highlight"><span class="number-label">6</span><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+          </tr>
+          <tr>
+            <td class="highlight"><span class="number-label">7</span><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td class="highlight"><span class="number-label">8</span><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td class="highlight color-violet"><input type="text" maxlength="1" id="cell-violet"></td>
+            <td class="black"></td>
+          </tr>
+          <tr>
+            <td><input type="text" maxlength="1"></td>
+            <td class="black"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td class="black"></td>
+            <td class="highlight color-pink"><span class="number-label">9</span><input type="text" maxlength="1" id="cell9"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td class="highlight"><span class="number-label">10</span><input type="text" maxlength="1"></td>
+          </tr>
+          <tr>
+            <td class="highlight"><span class="number-label">11</span><input type="text" maxlength="1"></td>
+            <td class="highlight"><span class="number-label">12</span><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td class="highlight"><span class="number-label">13</span><input type="text" maxlength="1"></td>
+            <td class="black"></td>
+            <td class="black"></td>
+            <td class="highlight color-indigo"><span class="number-label">14</span><input type="text" maxlength="1" id="cell14"></td>
+            <td><input type="text" maxlength="1"></td>
+          </tr>
+          <tr>
+            <td class="highlight color-orange"><span class="number-label">15</span><input type="text" maxlength="1" id="cell15"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td class="black"></td>
+            <td class="highlight color-red"><span class="number-label">16</span><input type="text" maxlength="1" id="cell16"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td class="highlight color-green"><span class="number-label">17</span><input type="text" maxlength="1" id="cell17"></td>
+            <td class="black"></td>
+            <td><input type="text" maxlength="1"></td>
+          </tr>
+          <tr>
+            <td class="highlight"><span class="number-label">18</span><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td class="black"></td>
+            <td class="highlight"><span class="number-label">19</span><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+            <td><input type="text" maxlength="1"></td>
+          </tr>
+        </table>
+      </div>
+      
+      <div class="clues-section">
+        <div class="clue-column">
+          <h3>מאוזן</h3>
+          <div class="clue-item"><span class="clue-number">1.</span><span class="clue-text">מטבע יפני</span></div>
+          <div class="clue-item"><span class="clue-number">3.</span><span class="clue-text">תהפוך לנסיך</span></div>
+          <div class="clue-item"><span class="clue-number">7.</span><span class="clue-text">סקנדל, מחדל</span></div>
+          <div class="clue-item"><span class="clue-number">9.</span><span class="clue-text">מוקדם, שלב מכין</span></div>
+          <div class="clue-item"><span class="clue-number">11.</span><span class="clue-text">שי, דורון</span></div>
+          <div class="clue-item"><span class="clue-number">14.</span><span class="clue-text">מקור מים גדול</span></div>
+          <div class="clue-item"><span class="clue-number">15.</span><span class="clue-text">קרס, אונקל</span></div>
+          <div class="clue-item"><span class="clue-number">16.</span><span class="clue-text">סוג של אגוז</span></div>
+          <div class="clue-item"><span class="clue-number">18.</span><span class="clue-text">עבר מעירנות לשינה</span></div>
+          <div class="clue-item"><span class="clue-number">19.</span><span class="clue-text">משקה אלכוהולי</span></div>
+        </div>
+        <div class="clue-column">
+          <h3>מאונך</h3>
+          <div class="clue-item"><span class="clue-number">1.</span><span class="clue-text">מדבר, שממה</span></div>
+          <div class="clue-item"><span class="clue-number">2.</span><span class="clue-text">מש, זז</span></div>
+          <div class="clue-item"><span class="clue-number">3.</span><span class="clue-text">פקודה, הוראה</span></div>
+          <div class="clue-item"><span class="clue-number">4.</span><span class="clue-text">אי זוגי</span></div>
+          <div class="clue-item"><span class="clue-number">5.</span><span class="clue-text">רוק, נוזל פה</span></div>
+          <div class="clue-item"><span class="clue-number">6.</span><span class="clue-text">שצבעו נחלש</span></div>
+          <div class="clue-item"><span class="clue-number">8.</span><span class="clue-text">שירה, זמר</span></div>
+          <div class="clue-item"><span class="clue-number">10.</span><span class="clue-text">מחלקת מחשוב בצה"ל</span></div>
+          <div class="clue-item"><span class="clue-number">12.</span><span class="clue-text">סוג של מבנה נתונים</span></div>
+          <div class="clue-item"><span class="clue-number">13.</span><span class="clue-text">שוק, תדהמה</span></div>
+          <div class="clue-item"><span class="clue-number">17.</span><span class="clue-text">אוסף פרחים</span></div>
+        </div>
+      </div>
+      
+      <div class="answer-row">
+        <!-- Colors from right to left: pink, red, orange, yellow, green, indigo, violet -->
+        <div class="answer-cell color-pink">
+          <input type="text" maxlength="1" id="answer1">
+        </div>
+        <div class="answer-cell color-red">
+          <input type="text" maxlength="1" id="answer2">
+        </div>
+        <div class="answer-cell color-orange">
+          <input type="text" maxlength="1" id="answer3">
+        </div>
+        <div class="answer-cell color-yellow">
+          <input type="text" maxlength="1" id="answer4">
+        </div>
+        <div class="answer-cell color-green">
+          <input type="text" maxlength="1" id="answer5">
+        </div>
+        <div class="answer-cell color-indigo">
+          <input type="text" maxlength="1" id="answer6">
+        </div>
+        <div class="answer-cell color-violet">
+          <input type="text" maxlength="1" id="answer7">
+        </div>
+      </div>
+      
+      <div id="alert-container"></div>
+      
+      <div class="text-center mt-4">
+        <button onclick="checkAnswer()" class="btn btn-primary btn-large">
+          בדוק תשובה ✅
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module">
+    import { validateRiddle2 } from './src/js/riddles.js';
+    
+    // Get answer inputs
+    const answerInputs = [
+      document.getElementById('answer1'), // pink (value 9)
+      document.getElementById('answer2'), // red (value 16)
+      document.getElementById('answer3'), // orange (value 15)
+      document.getElementById('answer4'), // yellow (value 1)
+      document.getElementById('answer5'), // green (value 17)
+      document.getElementById('answer6'), // indigo (value 14)
+      document.getElementById('answer7'), // violet
+    ];
+    
+    // Get crossword cells mapped to answer boxes
+    const crosswordCells = [
+      document.getElementById('cell9'),   // pink -> answer1
+      document.getElementById('cell16'),  // red -> answer2
+      document.getElementById('cell15'),  // orange -> answer3
+      document.getElementById('cell1'),   // yellow -> answer4
+      document.getElementById('cell17'),  // green -> answer5
+      document.getElementById('cell14'),  // indigo -> answer6
+      document.getElementById('cell-violet'), // violet -> answer7
+    ];
+    
+    // Sync crossword cells with answer boxes (bidirectional)
+    crosswordCells.forEach((cell, index) => {
+      if (cell && answerInputs[index]) {
+        const answerInput = answerInputs[index];
+        const cellInput = cell.querySelector('input');
+        
+        if (cellInput) {
+          // Crossword to Answer
+          cellInput.addEventListener('input', (e) => {
+            answerInput.value = e.target.value;
+          });
+          
+          // Answer to Crossword
+          answerInput.addEventListener('input', (e) => {
+            cellInput.value = e.target.value;
+          });
+        }
+      }
+    });
+    
+    window.checkAnswer = function() {
+      const answers = answerInputs.map(input => input.value);
+      
+      const alertContainer = document.getElementById('alert-container');
+      
+      if (validateRiddle2(answers)) {
+        alertContainer.innerHTML = '<div class="alert alert-success">✅ נכון! מעבר למסך החגיגה...</div>';
+        setTimeout(() => {
+          window.location.href = 'celebration.html';
+        }, 1500);
+      } else {
+        alertContainer.innerHTML = '<div class="alert alert-error">❌ תשובה שגויה. נסי שוב!</div>';
+        answerInputs.forEach(input => input.value = '');
+        crosswordCells.forEach(cell => {
+          const input = cell?.querySelector('input');
+          if (input) input.value = '';
+        });
+      }
+    };
+    
+    // Auto-advance for answer inputs
+    answerInputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        if (e.target.value && index < answerInputs.length - 1) {
+          answerInputs[index + 1].focus();
+        }
+      });
+    });
+    
+    document.getElementById('answer1').focus();
+  </script>
+</body>
+</html>
+

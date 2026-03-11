@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חידה 6 - חפש את המטמון</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    .riddle-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .riddle-number {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .gematria-instruction {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-lg);
+      font-size: 1.1rem;
+    }
+    
+    .gematria-section {
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .gematria-word {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-xl);
+      flex-wrap: wrap;
+    }
+    
+    .gematria-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+    
+    .gematria-cell input {
+      width: 50px;
+      height: 50px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: var(--font-family-hebrew);
+      background: var(--bg-primary);
+    }
+    
+    .gematria-cell input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+    
+    .gematria-number {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    
+    .word-separator {
+      width: 100%;
+      height: 2px;
+      background: var(--border-color);
+      margin: var(--spacing-md) 0;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="riddle-header">
+        <div class="riddle-number">6</div>
+        <h2>חידה שישית</h2>
+        <p class="gematria-instruction">מלאי את האותיות לפי ערכי הגימטריה. התשובה היא מכשיר חשמלי (2 מילים, 5 אותיות כל אחת)</p>
+      </div>
+      
+      <div class="gematria-section">
+        <!-- Word 1: מכונת (מ=40, כ=20, ו=6, נ=50, ת=400) -->
+        <div class="gematria-word" id="word1">
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w1c1" data-value="40">
+            <span class="gematria-number">40</span>
+          </div>
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w1c2" data-value="20">
+            <span class="gematria-number">20</span>
+          </div>
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w1c3" data-value="6">
+            <span class="gematria-number">6</span>
+          </div>
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w1c4" data-value="50">
+            <span class="gematria-number">50</span>
+          </div>
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w1c5" data-value="400">
+            <span class="gematria-number">400</span>
+          </div>
+        </div>
+        
+        <div class="word-separator"></div>
+        
+        <!-- Word 2: כביסה (כ=20, ב=2, י=10, ס=60, ה=5) -->
+        <div class="gematria-word" id="word2">
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w2c1" data-value="20">
+            <span class="gematria-number">20</span>
+          </div>
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w2c2" data-value="2">
+            <span class="gematria-number">2</span>
+          </div>
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w2c3" data-value="10">
+            <span class="gematria-number">10</span>
+          </div>
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w2c4" data-value="60">
+            <span class="gematria-number">60</span>
+          </div>
+          <div class="gematria-cell">
+            <input type="text" maxlength="1" id="w2c5" data-value="5">
+            <span class="gematria-number">5</span>
+          </div>
+        </div>
+      </div>
+      
+      <div id="alert-container"></div>
+      
+      <div class="text-center mt-4">
+        <button onclick="checkAnswer()" class="btn btn-primary btn-large">
+          בדוק תשובה ✅
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module">
+    import { validateRiddle7 } from './src/js/riddles.js';
+    
+    const word1Inputs = [
+      document.getElementById('w1c1'),
+      document.getElementById('w1c2'),
+      document.getElementById('w1c3'),
+      document.getElementById('w1c4'),
+      document.getElementById('w1c5'),
+    ];
+    
+    const word2Inputs = [
+      document.getElementById('w2c1'),
+      document.getElementById('w2c2'),
+      document.getElementById('w2c3'),
+      document.getElementById('w2c4'),
+      document.getElementById('w2c5'),
+    ];
+    
+    const allInputs = [...word1Inputs, ...word2Inputs];
+    
+    function setupAutoAdvance(inputs) {
+      inputs.forEach((input, index) => {
+        if (!input) return;
+        
+        input.addEventListener('input', (e) => {
+          if (e.target.value && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        });
+        
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && index > 0) {
+            e.preventDefault();
+            inputs[index - 1].focus();
+          }
+        });
+      });
+    }
+    
+    setupAutoAdvance(allInputs);
+    
+    window.checkAnswer = function() {
+      const answers = allInputs.map(input => input.value);
+      const alertContainer = document.getElementById('alert-container');
+      
+      if (validateRiddle7(answers)) {
+        alertContainer.innerHTML = '<div class="alert alert-success">🎉 נכון! מכונת כביסה! מעבר לחידה הבאה...</div>';
+        setTimeout(() => {
+          window.location.href = 'riddle7.html';
+        }, 1500);
+      } else {
+        alertContainer.innerHTML = '<div class="alert alert-error">❌ תשובה שגויה. נסי שוב!</div>';
+        allInputs.forEach(input => input.value = '');
+      }
+    };
+    
+    document.getElementById('w1c1').focus();
+  </script>
+</body>
+</html>

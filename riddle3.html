@@ -74,6 +74,14 @@
       display: block;
       animation: fadeIn 0.3s ease-in;
     }
+    
+    .final-riddle {
+      text-align: center;
+      padding: var(--spacing-lg);
+      background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+      border-radius: var(--border-radius-lg);
+      margin: var(--spacing-xl) 0;
+    }
   </style>
 </head>
 <body>
@@ -82,11 +90,11 @@
       <div class="riddle-header">
         <div class="riddle-number">3</div>
         <h2>חידה שלישית</h2>
-        <p>פתרי את החידה</p>
+        <p>המשיכי לפתור - את מתקדמת יפה!</p>
       </div>
       
       <div class="question-box">
-        <h3>❓ מה זה "הפך מנותק"?</h3>
+        <h3>❓ מה זה "הבו לי אות שאוכל לאפות"?</h3>
       </div>
       
       <div class="answer-input-wrapper">
@@ -104,7 +112,7 @@
           💡 הצג רמז
         </button>
         <div id="hint-text" class="hint-text">
-          אנגרמה למכשיר חשמלי (3,5)
+          חידת הגיון. התשובה בעלת 4 אותיות למכשיר חשמל
         </div>
       </div>
       
@@ -119,14 +127,14 @@
   </div>
   
   <script type="module">
-    import { validateRiddle3 } from './src/js/riddles.js';
+    import { validateRiddle5 } from './src/js/riddles.js';
     
     window.checkAnswer = function() {
       const answer = document.getElementById('answer').value.trim();
       const alertContainer = document.getElementById('alert-container');
       
-      if (validateRiddle3(answer)) {
-        alertContainer.innerHTML = '<div class="alert alert-success">✅ נכון! מעבר לחידה הבאה...</div>';
+      if (validateRiddle5(answer)) {
+        alertContainer.innerHTML = '<div class="alert alert-success">🎉 נכון! מעבר לחידה הבאה...</div>';
         setTimeout(() => {
           window.location.href = 'riddle4.html';
         }, 1500);
@@ -141,7 +149,6 @@
       hintText.classList.toggle('show');
     };
     
-    // Allow Enter key to submit
     document.getElementById('answer').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         checkAnswer();
@@ -150,3 +157,4 @@
   </script>
 </body>
 </html>
+

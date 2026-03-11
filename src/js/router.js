@@ -10,6 +10,8 @@ export const ROUTES = {
   RIDDLE3: '/riddle/3',
   RIDDLE4: '/riddle/4',
   RIDDLE5: '/riddle/5',
+  RIDDLE6: '/riddle/6',
+  RIDDLE7: '/riddle/7',
   CELEBRATION: '/celebration',
   END: '/end',
 };
@@ -29,10 +31,13 @@ export function getCurrentRoute() {
   if (filename === 'riddle3.html') return ROUTES.RIDDLE3;
   if (filename === 'riddle4.html') return ROUTES.RIDDLE4;
   if (filename === 'riddle5.html') return ROUTES.RIDDLE5;
+  if (filename === 'riddle6.html') return ROUTES.RIDDLE6;
+  if (filename === 'riddle7.html') return ROUTES.RIDDLE7;
   if (filename === 'celebration.html') return ROUTES.CELEBRATION;
   if (filename === 'end.html') return ROUTES.END;
   
   return ROUTES.WELCOME;
 }
+
 
 

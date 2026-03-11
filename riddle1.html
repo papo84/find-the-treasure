@@ -24,23 +24,16 @@
       margin-bottom: var(--spacing-md);
     }
     
-    .pyramid-wrapper {
-      margin: var(--spacing-xl) 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-sm);
+      max-width: 400px;
+      margin: var(--spacing-xl) auto;
     }
     
-    .pyramid-row {
-      display: flex;
-      justify-content: center;
-      margin-bottom: var(--spacing-sm);
-      gap: var(--spacing-xs);
-    }
-    
-    .pyramid-cell {
-      width: 50px;
-      height: 50px;
+    .puzzle-cell {
+      aspect-ratio: 1;
       border: 2px solid var(--border-color);
       border-radius: var(--border-radius);
       background: var(--bg-primary);
@@ -50,7 +43,7 @@
       position: relative;
     }
     
-    .pyramid-cell input {
+    .puzzle-cell input {
       width: 100%;
       height: 100%;
       border: none;
@@ -58,35 +51,29 @@
       font-size: 1.5rem;
       font-weight: 700;
       background: transparent;
-      font-family: var(--font-family-hebrew);
+      border-radius: var(--border-radius);
     }
     
-    .pyramid-cell.answer {
+    .puzzle-cell.answer {
       background: #d1fae5;
       border-color: var(--primary-color);
-      border-width: 3px;
     }
     
-    .clue-number {
-      position: absolute;
-      top: 2px;
-      right: 4px;
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-      z-index: 1;
-      font-weight: 600;
-    }
-    
-    .clues-section {
-      margin-top: var(--spacing-xl);
-      padding: var(--spacing-lg);
+    .puzzle-cell.empty {
       background: var(--bg-secondary);
+      border: none;
+    }
+    
+    .clues-list {
+      background: var(--bg-secondary);
+      padding: var(--spacing-lg);
       border-radius: var(--border-radius);
+      margin: var(--spacing-xl) 0;
     }
     
     .clue-item {
       padding: var(--spacing-sm);
-      margin-bottom: var(--spacing-sm);
+      margin-bottom: var(--spacing-xs);
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -112,7 +99,6 @@
       gap: var(--spacing-sm);
       margin: var(--spacing-xl) 0;
       justify-content: center;
-      flex-direction: row-reverse; /* RTL for Hebrew */
     }
     
     .answer-cell {
@@ -134,14 +120,6 @@
       font-size: 1.5rem;
       font-weight: 700;
       background: transparent;
-      font-family: var(--font-family-hebrew);
-    }
-    
-    .instruction-text {
-      text-align: center;
-      color: var(--text-secondary);
-      margin-bottom: var(--spacing-lg);
-      font-style: italic;
     }
   </style>
 </head>
@@ -151,108 +129,64 @@
       <div class="riddle-header">
         <div class="riddle-number">1</div>
         <h2>חידה ראשונה</h2>
-        <p class="instruction-text">פתרי את החידה לפי הרמזים. המילה האחרונה היא התשובה (בסדר הפוך)</p>
+        <p>פתרי את החידה לפי הרמזים</p>
       </div>
       
-      <div class="pyramid-wrapper">
-        <!-- Row 1: 2 letters -->
-        <div class="pyramid-row">
-          <div class="pyramid-cell">
-            <span class="clue-number">1</span>
-            <input type="text" maxlength="1" id="r1c1">
-          </div>
-          <div class="pyramid-cell">
-            <input type="text" maxlength="1" id="r1c2">
-          </div>
-        </div>
-        
-        <!-- Row 2: 3 letters -->
-        <div class="pyramid-row">
-          <div class="pyramid-cell">
-            <span class="clue-number">2</span>
-            <input type="text" maxlength="1" id="r2c1">
-          </div>
-          <div class="pyramid-cell">
-            <input type="text" maxlength="1" id="r2c2">
-          </div>
-          <div class="pyramid-cell">
-            <input type="text" maxlength="1" id="r2c3">
-          </div>
-        </div>
-        
-        <!-- Row 3: 4 letters -->
-        <div class="pyramid-row">
-          <div class="pyramid-cell">
-            <span class="clue-number">3</span>
-            <input type="text" maxlength="1" id="r3c1">
-          </div>
-          <div class="pyramid-cell">
-            <input type="text" maxlength="1" id="r3c2">
-          </div>
-          <div class="pyramid-cell">
-            <input type="text" maxlength="1" id="r3c3">
-          </div>
-          <div class="pyramid-cell">
-            <input type="text" maxlength="1" id="r3c4">
-          </div>
-        </div>
-        
-        <!-- Row 4: 5 letters (answer row) -->
-        <div class="pyramid-row">
-          <div class="pyramid-cell answer">
-            <span class="clue-number">4</span>
-            <input type="text" maxlength="1" id="r4c1">
-          </div>
-          <div class="pyramid-cell answer">
-            <input type="text" maxlength="1" id="r4c2">
-          </div>
-          <div class="pyramid-cell answer">
-            <input type="text" maxlength="1" id="r4c3">
-          </div>
-          <div class="pyramid-cell answer">
-            <input type="text" maxlength="1" id="r4c4">
-          </div>
-          <div class="pyramid-cell answer">
-            <input type="text" maxlength="1" id="r4c5">
-          </div>
-        </div>
+      <div class="puzzle-grid">
+        <!-- Row 1: Top-right to bottom-left diagonal (RTL: leftmost to rightmost) -->
+        <div class="puzzle-cell answer"><input type="text" maxlength="1" id="r1c0"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r1c1"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r1c2"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r1c3"></div>
+        <!-- Row 2 -->
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r2c0"></div>
+        <div class="puzzle-cell answer"><input type="text" maxlength="1" id="r2c1"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r2c2"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r2c3"></div>
+        <!-- Row 3 -->
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r3c0"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r3c1"></div>
+        <div class="puzzle-cell answer"><input type="text" maxlength="1" id="r3c2"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r3c3"></div>
+        <!-- Row 4 -->
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r4c0"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r4c1"></div>
+        <div class="puzzle-cell"><input type="text" maxlength="1" id="r4c2"></div>
+        <div class="puzzle-cell answer"><input type="text" maxlength="1" id="r4c3"></div>
       </div>
       
-      <div class="clues-section">
+      <div class="clues-list">
         <h3>רמזים:</h3>
         <div class="clue-item">
           <span class="clue-number">1.</span>
-          <span class="clue-text">חיית בקר</span>
+          <span class="clue-text">אסקופה</span>
         </div>
         <div class="clue-item">
           <span class="clue-number">2.</span>
-          <span class="clue-text">נשיא המדינה</span>
+          <span class="clue-text">לבלר</span>
         </div>
         <div class="clue-item">
           <span class="clue-number">3.</span>
-          <span class="clue-text">אבן יסוד המתמטיקה</span>
+          <span class="clue-text">תפעילי את הרובה</span>
         </div>
         <div class="clue-item">
           <span class="clue-number">4.</span>
-          <span class="clue-text">גזוזטרה</span>
+          <span class="clue-text">קורה לעתים רחוקות</span>
         </div>
       </div>
       
       <div class="answer-row">
         <div class="answer-cell">
-          <input type="text" maxlength="1" id="answer1" class="answer-input">
+          <input type="text" maxlength="1" id="final-answer1">
         </div>
         <div class="answer-cell">
-          <input type="text" maxlength="1" id="answer2" class="answer-input">
+          <input type="text" maxlength="1" id="final-answer2">
         </div>
         <div class="answer-cell">
-          <input type="text" maxlength="1" id="answer3" class="answer-input">
+          <input type="text" maxlength="1" id="final-answer3">
         </div>
         <div class="answer-cell">
-          <input type="text" maxlength="1" id="answer4" class="answer-input">
-        </div>
-        <div class="answer-cell">
-          <input type="text" maxlength="1" id="answer5" class="answer-input">
+          <input type="text" maxlength="1" id="final-answer4">
         </div>
       </div>
       
@@ -267,75 +201,50 @@
   </div>
   
   <script type="module">
-    import { validateRiddle1 } from './src/js/riddles.js';
+    import { validateRiddle4 } from './src/js/riddles.js';
     
-    // Get all inputs
+    // Get diagonal inputs (top-right to bottom-left in RTL)
+    const diagonalInputs = [
+      document.getElementById('r1c0'), // Row 1, Col 0 (diagonal)
+      document.getElementById('r2c1'), // Row 2, Col 1 (diagonal)
+      document.getElementById('r3c2'), // Row 3, Col 2 (diagonal)
+      document.getElementById('r4c3'), // Row 4, Col 3 (diagonal)
+    ];
+    
+    // Get answer row inputs
     const answerInputs = [
-      document.getElementById('answer1'),
-      document.getElementById('answer2'),
-      document.getElementById('answer3'),
-      document.getElementById('answer4'),
-      document.getElementById('answer5'),
+      document.getElementById('final-answer1'),
+      document.getElementById('final-answer2'),
+      document.getElementById('final-answer3'),
+      document.getElementById('final-answer4'),
     ];
     
-    const pyramidRow4Inputs = [
-      document.getElementById('r4c1'),
-      document.getElementById('r4c2'),
-      document.getElementById('r4c3'),
-      document.getElementById('r4c4'),
-      document.getElementById('r4c5'),
-    ];
-    
-    // Sync answer row with pyramid row 4 (bidirectional)
-    function syncAnswerRow() {
-      // Pyramid to Answer: when pyramid row 4 changes, update answer row
-      pyramidRow4Inputs.forEach((input, index) => {
-        input.addEventListener('input', (e) => {
-          answerInputs[4 - index].value = e.target.value;
-        });
-        
-        // Also sync on paste
-        input.addEventListener('paste', () => {
-          setTimeout(() => {
-            answerInputs[4 - index].value = input.value;
-          }, 0);
-        });
-      });
-      
-      // Answer to Pyramid: when answer row changes, update pyramid row 4
-      answerInputs.forEach((input, index) => {
-        input.addEventListener('input', (e) => {
-          pyramidRow4Inputs[4-index].value = e.target.value;
-        });
-        
-        // Also sync on paste
-        input.addEventListener('paste', () => {
-          setTimeout(() => {
-            pyramidRow4Inputs[4-index].value = input.value;
-          }, 0);
-        });
-      });
-    }
-    
-    // Collect all inputs in visual reading order (RTL: right to left, top to bottom)
-    // Note: answer row has flex-direction: row-reverse, so visually answerInputs[0] is on the right
+    // Collect all inputs in reading order (RTL: right to left, top to bottom)
+    // Row 1: r1c0, r1c1, r1c2, r1c3
+    // Row 2: r2c0, r2c1, r2c2, r2c3
+    // Row 3: r3c0, r3c1, r3c2, r3c3
+    // Row 4: r4c0, r4c1, r4c2, r4c3
     const allInputsInOrder = [
-      // Row 1 (rightmost to leftmost)
+      // Row 1 (right to left)
+      document.getElementById('r1c0'),
       document.getElementById('r1c1'),
       document.getElementById('r1c2'),
+      document.getElementById('r1c3'),
       // Row 2
+      document.getElementById('r2c0'),
       document.getElementById('r2c1'),
       document.getElementById('r2c2'),
       document.getElementById('r2c3'),
       // Row 3
+      document.getElementById('r3c0'),
       document.getElementById('r3c1'),
       document.getElementById('r3c2'),
       document.getElementById('r3c3'),
-      document.getElementById('r3c4'),
-      // Row 4 (answer row in pyramid)
-      ...pyramidRow4Inputs,
-      // Answer row (visually right to left due to row-reverse: answer5 is visually rightmost)
-      ...answerInputs.reverse(),
+      // Row 4
+      document.getElementById('r4c0'),
+      document.getElementById('r4c1'),
+      document.getElementById('r4c2'),
+      document.getElementById('r4c3'),
     ];
     
     // Set tab indexes in reading order (RTL: rightmost = 1, leftmost = highest)
@@ -345,8 +254,36 @@
       }
     });
     
-    // Reverse answerInputs back to original DOM order for other uses
-    answerInputs.reverse();
+    // Sync diagonal with answer row (bidirectional)
+    function syncDiagonal() {
+      // Diagonal to Answer: when diagonal changes, update answer row
+      diagonalInputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          answerInputs[index].value = e.target.value;
+        });
+        
+        // Also sync on paste
+        input.addEventListener('paste', () => {
+          setTimeout(() => {
+            answerInputs[index].value = input.value;
+          }, 0);
+        });
+      });
+      
+      // Answer to Diagonal: when answer row changes, update diagonal
+      answerInputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          diagonalInputs[index].value = e.target.value;
+        });
+        
+        // Also sync on paste
+        input.addEventListener('paste', () => {
+          setTimeout(() => {
+            diagonalInputs[index].value = input.value;
+          }, 0);
+        });
+      });
+    }
     
     // Auto-advance function for any input list
     function setupAutoAdvance(inputs) {
@@ -370,13 +307,39 @@
       });
     }
     
-    // Make checkAnswer available globally
+    // Setup auto-advance for each row
+    setupAutoAdvance([
+      document.getElementById('r1c0'),
+      document.getElementById('r1c1'),
+      document.getElementById('r1c2'),
+      document.getElementById('r1c3'),
+    ]);
+    setupAutoAdvance([
+      document.getElementById('r2c0'),
+      document.getElementById('r2c1'),
+      document.getElementById('r2c2'),
+      document.getElementById('r2c3'),
+    ]);
+    setupAutoAdvance([
+      document.getElementById('r3c0'),
+      document.getElementById('r3c1'),
+      document.getElementById('r3c2'),
+      document.getElementById('r3c3'),
+    ]);
+    setupAutoAdvance([
+      document.getElementById('r4c0'),
+      document.getElementById('r4c1'),
+      document.getElementById('r4c2'),
+      document.getElementById('r4c3'),
+    ]);
+    setupAutoAdvance(answerInputs);
+    
     window.checkAnswer = function() {
       const answers = answerInputs.map(input => input.value);
       
       const alertContainer = document.getElementById('alert-container');
       
-      if (validateRiddle1(answers)) {
+      if (validateRiddle4(answers)) {
         alertContainer.innerHTML = '<div class="alert alert-success">✅ נכון! מעבר לחידה הבאה...</div>';
         setTimeout(() => {
           window.location.href = 'riddle2.html';
@@ -385,65 +348,16 @@
         alertContainer.innerHTML = '<div class="alert alert-error">❌ תשובה שגויה. נסי שוב!</div>';
         // Clear all inputs
         answerInputs.forEach(input => input.value = '');
-        pyramidRow4Inputs.forEach(input => input.value = '');
+        diagonalInputs.forEach(input => input.value = '');
       }
     };
     
-    // Initialize
-    syncAnswerRow();
+    // Initialize sync
+    syncDiagonal();
     
-    // Setup auto-advance for individual rows
-    setupAutoAdvance([
-      document.getElementById('r1c1'),
-      document.getElementById('r1c2'),
-    ]);
-    setupAutoAdvance([
-      document.getElementById('r2c1'),
-      document.getElementById('r2c2'),
-      document.getElementById('r2c3'),
-    ]);
-    setupAutoAdvance([
-      document.getElementById('r3c1'),
-      document.getElementById('r3c2'),
-      document.getElementById('r3c3'),
-      document.getElementById('r3c4'),
-    ]);
-    setupAutoAdvance(pyramidRow4Inputs);
-    
-    // Setup auto-advance for answer row
-    // Answer row has flex-direction: row-reverse, so visually the order is reversed:
-    // Visually: answer5 (right) -> answer4 -> answer3 -> answer2 -> answer1 (left)
-    // DOM order: answer1, answer2, answer3, answer4, answer5
-    // So we need to reverse the auto-advance logic
-    const answerInputsReversed = [...answerInputs].reverse();
-    answerInputs.forEach((input, domIndex) => {
-      if (!input) return;
-      
-      // Find the visual index (reversed)
-      const visualIndex = answerInputs.length - 1 - domIndex;
-      
-      input.addEventListener('input', (e) => {
-        if (e.target.value && visualIndex < answerInputsReversed.length - 1) {
-          // Move to next input visually (leftward in RTL)
-          const nextVisualIndex = visualIndex + 1;
-          const nextDomIndex = answerInputs.length - 1 - nextVisualIndex;
-          answerInputs[nextDomIndex].focus();
-        }
-      });
-      
-      // Handle backspace to go to previous input (visually rightward)
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && !e.target.value && visualIndex > 0) {
-          e.preventDefault();
-          const prevVisualIndex = visualIndex - 1;
-          const prevDomIndex = answerInputs.length - 1 - prevVisualIndex;
-          answerInputs[prevDomIndex].focus();
-        }
-      });
-    });
-    
-    // Auto-focus first input (rightmost, top)
-    document.getElementById('r1c1').focus();
+    // Auto-focus first input (top-right)
+    document.getElementById('r1c0').focus();
   </script>
 </body>
 </html>
+

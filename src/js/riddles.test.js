@@ -5,6 +5,8 @@ import {
   validateRiddle3,
   validateRiddle4,
   validateRiddle5,
+  validateRiddle6,
+  validateRiddle7,
   getCompletionCode,
   RIDDLE_ANSWERS,
 } from './riddles.js';
@@ -98,6 +100,38 @@ describe('Riddle Validation', () => {
     });
   });
 
+  describe('Riddle 6', () => {
+    it('should validate correct per-letter answer', () => {
+      expect(validateRiddle6(['מ', 'ת', 'ח', 'ת', 'ל', 'ע', 'ל', 'י', 'ם', 'ש', 'ל', 'ע', 'ץ', 'ה', 'א', 'ב', 'ו', 'ק', 'ד', 'ו'])).toBe(true);
+    });
+
+    it('should accept regular forms במקום אותיות סופיות', () => {
+      expect(validateRiddle6(['מ', 'ת', 'ח', 'ת', 'ל', 'ע', 'ל', 'י', 'מ', 'ש', 'ל', 'ע', 'צ', 'ה', 'א', 'ב', 'ו', 'ק', 'ד', 'ו'])).toBe(true);
+    });
+
+    it('should reject incorrect answer', () => {
+      expect(validateRiddle6(['מ', 'ת', 'ח', 'ת', 'ל', 'ע', 'ל', 'י', 'ם', 'ש', 'ל', 'ע', 'ץ', 'ה', 'א', 'ב', 'ו', 'ק', 'ד', 'ה'])).toBe(false);
+      expect(validateRiddle6([])).toBe(false);
+      expect(validateRiddle6(null)).toBe(false);
+    });
+  });
+
+  describe('Riddle 7', () => {
+    it('should validate correct answer', () => {
+      expect(validateRiddle7(['מ', 'כ', 'ו', 'נ', 'ת', 'כ', 'ב', 'י', 'ס', 'ה'])).toBe(true);
+    });
+
+    it('should reject incorrect answer', () => {
+      expect(validateRiddle7(['מ', 'כ', 'ו', 'נ', 'ת', 'מ', 'ק', 'ר', 'ר', 'ה'])).toBe(false);
+    });
+
+    it('should reject wrong length', () => {
+      expect(validateRiddle7(['מ', 'כ', 'ו', 'נ', 'ת'])).toBe(false);
+      expect(validateRiddle7([])).toBe(false);
+      expect(validateRiddle7(null)).toBe(false);
+    });
+  });
+
   describe('Completion Code', () => {
     it('should return the completion code', () => {
       const code = getCompletionCode();
@@ -113,6 +147,8 @@ describe('Riddle Validation', () => {
       expect(RIDDLE_ANSWERS.riddle3).toBeDefined();
       expect(RIDDLE_ANSWERS.riddle4).toBeDefined();
       expect(RIDDLE_ANSWERS.riddle5).toBeDefined();
+      expect(RIDDLE_ANSWERS.riddle6).toBeDefined();
+      expect(RIDDLE_ANSWERS.riddle7).toBeDefined();
     });
 
     it('should have correct answer types', () => {
@@ -121,8 +157,11 @@ describe('Riddle Validation', () => {
       expect(typeof RIDDLE_ANSWERS.riddle3).toBe('string');
       expect(Array.isArray(RIDDLE_ANSWERS.riddle4)).toBe(true);
       expect(typeof RIDDLE_ANSWERS.riddle5).toBe('string');
+      expect(Array.isArray(RIDDLE_ANSWERS.riddle6)).toBe(true);
+      expect(Array.isArray(RIDDLE_ANSWERS.riddle7)).toBe(true);
     });
   });
 });
+
 
 
